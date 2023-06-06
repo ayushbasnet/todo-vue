@@ -57,7 +57,7 @@ button {
   margin: 0.5em;
 }
 
-.done {
+.checked {
   text-decoration: line-through;
   color: grey;
 }
