@@ -17,17 +17,14 @@
           enter-active-class="animated bounceInUp"
           leave-active-class="animated bounceOutDown"
         >
-          <li v-for="(todos, index) in todos" :key="index">
+          <li v-for="(todos, index) in todos" :key="todos.id">
             <input
               type="checkbox"
               id="checkbox1"
-              check
               v-model="todos.checked"
               @change="reorderItems(todos, index, (top = true))"
             />
-            <span :class="{ checked: todos.checked }">
-              {{ todos.todo + " " + todos.checked }}</span
-            >
+            <span :class="{ checked: todos.checked }"> {{ todos.todo }}</span>
             <button @click="removeTodo(todos)" type="button" name="button">
               Remove
             </button>
@@ -41,16 +38,14 @@
           enter-active-class="animated bounceInUp"
           leave-active-class="animated bounceOutDown"
         >
-          <li v-for="(todos, index) in todosDone" :key="index">
+          <li v-for="(todos, index) in todosDone" :key="todos.id">
             <input
               type="checkbox"
               id="checkbox2"
               v-model="todos.checked"
               @change="reorderItems(todos, index, (top = false))"
             />
-            <span :class="{ checked: todos.checked }">
-              {{ todos.todo + " " + todos.checked }}</span
-            >
+            <span :class="{ checked: todos.checked }"> {{ todos.todo }}</span>
             <button @click="removeTodoDone(todos)" type="button" name="button">
               Remove
             </button>
@@ -69,21 +64,22 @@ export default {
   data() {
     return {
       todo: "",
+      counter: 6,
       todos: [
-        { todo: "1", checked: false },
-        { todo: "2", checked: false },
-        { todo: "3", checked: false },
-        { todo: "4", checked: false },
+        { id: 1, todo: "1", checked: false },
+        { id: 2, todo: "2", checked: false },
+        { id: 3, todo: "3", checked: false },
+        { id: 4, todo: "4", checked: false },
       ],
       todosDone: [
-        { todo: "1", checked: true },
-        { todo: "2", checked: true },
+        { id: 5, todo: "1", checked: true },
+        { id: 6, todo: "2", checked: true },
       ],
     };
   },
   methods: {
     addItem() {
-      this.todos.push({ todo: this.todo, checked: false });
+      this.todos.push({ todo: this.todo, checked: false, id: this.counter++ });
       this.todo = "";
     },
     removeTodo(todo) {
